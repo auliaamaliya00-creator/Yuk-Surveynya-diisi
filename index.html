@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff4fa3">
+  <title>Survey Data Mahasiswa · Statistika FIKOM UMI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ambient" aria-hidden="true"></div>
+  <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" title="Aktif/nonaktif musik dan suara">♫ Suara: OFF</button>
+
+  <main>
+    <section class="welcome screen active" id="welcomeScreen">
+      <div class="welcome-card">
+        <div class="sticker-row" aria-hidden="true"><span>🌸</span><span>💗</span><span>✨</span><span>🦋</span><span>🌷</span></div>
+        <p class="eyebrow">FAKULTAS ILMU KOMPUTER · UMI MAKASSAR</p>
+        <h1>Survey Data <span>Mahasiswa</span></h1>
+        <p class="welcome-subtitle">Tugas Statistika · Teknik Informatika</p>
+        <div class="flower-badge" aria-hidden="true">🌷</div>
+        <p class="welcome-copy">Haii, makasih sudah mampir! ♡<br>Yuk bantu tugas Statistika kami dengan mengisi survei ini secara jujur.</p>
+        <div class="mini-info">
+          <div><span>🎓</span><b>Usia 17–24 tahun</b></div>
+          <div><span>📝</span><b>Data untuk pembelajaran</b></div>
+          <div><span>🔒</span><b>Jawaban dijaga kerahasiaannya</b></div>
+        </div>
+        <p class="consent-note">Partisipasi sukarela. Jawaban DASS merupakan skrining awal untuk keperluan tugas, bukan diagnosis klinis. Jangan mengisi jika kamu tidak nyaman.</p>
+        <label class="consent"><input id="consentCheck" type="checkbox"> <span>Saya berusia 17–24 tahun, memahami keterangan di atas, dan bersedia berpartisipasi.</span></label>
+        <button class="primary-button" id="startButton" type="button" disabled>Mulai Survei <span>♡</span></button>
+        <p class="tiny-note">bunga, hati & kilau kecil ✨</p>
+      </div>
+    </section>
+
+    <section class="survey screen" id="surveyScreen" hidden>
+      <header class="survey-header">
+        <div>
+          <p class="eyebrow">STATISTIKA · TEKNIK INFORMATIKA</p>
+          <h2>Isi pelan-pelan, ya! <span>🌸</span></h2>
+          <p>Pastikan jawaban sesuai keadaanmu. Semua pertanyaan wajib diisi, kecuali nama.</p>
+        </div>
+        <div class="progress-wrap"><div class="progress-label"><span id="progressText">Bagian 1 dari 4</span><b id="progressPercent">0%</b></div><div class="progress-track"><div id="progressBar"></div></div></div>
+      </header>
+
+      <form id="surveyForm" novalidate>
+        <section class="form-section active" data-section="0">
+          <div class="section-heading"><span class="section-icon">🎀</span><div><h3>Kenalan dengan responden</h3><p>Nama boleh disamarkan atau dikosongkan.</p></div></div>
+          <div class="field-grid">
+            <label class="field full"><span>Nama / nama samaran <small>(opsional)</small></span><input name="nama" maxlength="80" autocomplete="off" placeholder="Misalnya: Responden A"></label>
+            <label class="field"><span>Universitas <b>*</b></span><input name="universitas" required maxlength="120" placeholder="Nama universitas"></label>
+            <label class="field"><span>Fakultas <b>*</b></span><input name="fakultas" required maxlength="120" placeholder="Nama fakultas"></label>
+            <label class="field"><span>Jurusan / program studi <b>*</b></span><input name="jurusan" required maxlength="120" placeholder="Nama jurusan"></label>
+            <label class="field"><span>Umur (tahun) <b>*</b></span><div class="stepper"><button type="button" data-step="-1" data-target="umur" aria-label="Kurangi umur">−</button><input name="umur" id="umur" type="number" min="17" max="24" step="1" required inputmode="numeric" placeholder="17–24"><button type="button" data-step="1" data-target="umur" aria-label="Tambah umur">+</button></div><small class="hint">Hanya responden berusia 17–24 tahun.</small></label>
+            <label class="field"><span>Jenis kelamin <b>*</b></span><select name="jenis_kelamin" required><option value="">Pilih jawaban</option><option>Perempuan</option><option>Laki-laki</option><option>Memilih tidak menjawab</option></select></label>
+            <label class="field"><span>Tinggi badan (cm) <b>*</b></span><div class="stepper"><button type="button" data-step="-1" data-target="tinggi" aria-label="Kurangi tinggi badan">−</button><input name="tinggi" id="tinggi" type="number" min="100" max="230" step="0.5" required inputmode="decimal" placeholder="cm"><button type="button" data-step="1" data-target="tinggi" aria-label="Tambah tinggi badan">+</button></div></label>
+            <label class="field"><span>Berat badan (kg) <b>*</b></span><div class="stepper"><button type="button" data-step="-1" data-target="berat" aria-label="Kurangi berat badan">−</button><input name="berat" id="berat" type="number" min="25" max="250" step="0.5" required inputmode="decimal" placeholder="kg"><button type="button" data-step="1" data-target="berat" aria-label="Tambah berat badan">+</button></div></label>
+            <label class="field"><span>Golongan darah <b>*</b></span><select name="golongan_darah" required><option value="">Pilih jawaban</option><option>A</option><option>B</option><option>AB</option><option>O</option><option>Tidak tahu</option></select></label>
+            <label class="field"><span>Durasi tidur setiap hari (jam) <b>*</b></span><div class="stepper"><button type="button" data-step="-0.5" data-target="tidur" aria-label="Kurangi durasi tidur">−</button><input name="tidur" id="tidur" type="number" min="0" max="24" step="0.5" required inputmode="decimal" placeholder="jam"><button type="button" data-step="0.5" data-target="tidur" aria-label="Tambah durasi tidur">+</button></div></label>
+            <label class="field"><span>Durasi olahraga per pekan (jam) <b>*</b></span><div class="stepper"><button type="button" data-step="-0.5" data-target="olahraga" aria-label="Kurangi olahraga">−</button><input name="olahraga" id="olahraga" type="number" min="0" max="168" step="0.5" required inputmode="decimal" placeholder="jam per pekan"><button type="button" data-step="0.5" data-target="olahraga" aria-label="Tambah olahraga">+</button></div></label>
+            <label class="field"><span>Durasi penggunaan media sosial setiap hari (jam) <b>*</b></span><div class="stepper"><button type="button" data-step="-0.5" data-target="sosmed" aria-label="Kurangi media sosial">−</button><input name="sosmed" id="sosmed" type="number" min="0" max="24" step="0.5" required inputmode="decimal" placeholder="jam per hari"><button type="button" data-step="0.5" data-target="sosmed" aria-label="Tambah media sosial">+</button></div></label>
+          </div>
+          <p class="form-error" aria-live="polite"></p>
+          <div class="form-actions"><span></span><button type="button" class="primary-button next-button">Lanjut ke DASS <span>♡</span></button></div>
+        </section>
+
+        <section class="form-section" data-section="1">
+          <div class="section-heading"><span class="section-icon">💗</span><div><h3>Pertanyaan DASS · 1–14</h3><p>Pilih satu jawaban untuk setiap pernyataan.</p></div></div>
+          <div class="scale-legend"><span><b>0</b> Tidak pernah sesuai dengan saya</span><span><b>1</b> Kadang-kadang sesuai dengan saya</span><span><b>2</b> Sering sesuai dengan saya</span><span><b>3</b> Sangat sering sesuai dengan saya</span></div>
+          <div class="question-list" id="questionsA"></div>
+          <p class="form-error" aria-live="polite"></p>
+          <div class="form-actions"><button type="button" class="secondary-button prev-button">← Kembali</button><button type="button" class="primary-button next-button">Lanjut <span>♡</span></button></div>
+        </section>
+
+        <section class="form-section" data-section="2">
+          <div class="section-heading"><span class="section-icon">🌷</span><div><h3>Pertanyaan DASS · 15–28</h3><p>Tidak ada jawaban benar atau salah.</p></div></div>
+          <div class="scale-legend"><span><b>0</b> Tidak pernah sesuai dengan saya</span><span><b>1</b> Kadang-kadang sesuai dengan saya</span><span><b>2</b> Sering sesuai dengan saya</span><span><b>3</b> Sangat sering sesuai dengan saya</span></div>
+          <div class="question-list" id="questionsB"></div>
+          <p class="form-error" aria-live="polite"></p>
+          <div class="form-actions"><button type="button" class="secondary-button prev-button">← Kembali</button><button type="button" class="primary-button next-button">Lanjut <span>♡</span></button></div>
+        </section>
+
+        <section class="form-section" data-section="3">
+          <div class="section-heading"><span class="section-icon">✨</span><div><h3>Pertanyaan DASS · 29–42</h3><p>Sebentar lagi selesai, semangat yaa!</p></div></div>
+          <div class="scale-legend"><span><b>0</b> Tidak pernah sesuai dengan saya</span><span><b>1</b> Kadang-kadang sesuai dengan saya</span><span><b>2</b> Sering sesuai dengan saya</span><span><b>3</b> Sangat sering sesuai dengan saya</span></div>
+          <div class="question-list" id="questionsC"></div>
+          <label class="consent final-consent"><input id="confirmAnswers" type="checkbox" required> <span>Saya sudah memeriksa jawaban dan bersedia mengirimkannya untuk keperluan tugas Statistika.</span></label>
+          <p class="form-error" aria-live="polite"></p>
+          <div class="form-actions"><button type="button" class="secondary-button prev-button">← Kembali</button><button type="submit" class="primary-button" id="submitButton">Kirim Jawaban 💌</button></div>
+        </section>
+      </form>
+    </section>
+
+    <section class="result-screen screen" id="resultScreen" hidden>
+      <div class="result-card">
+        <div class="result-confetti" aria-hidden="true">🌸 ✨ 💗 🌷 ✨</div>
+        <h2>Makasih banyak sudah mengisi! 💖</h2>
+        <p id="saveMessage">Terima kasih sudah membantu tugas Statistika kami.</p>
+        <div class="score-grid" id="scoreGrid"></div>
+        <p class="result-disclaimer">Kategori ini adalah interpretasi skrining awal berdasarkan rentang yang diberikan dalam lampiran tugas, bukan diagnosis medis atau psikologis. Jika hasil membuatmu khawatir, pertimbangkan berbicara dengan tenaga profesional yang tepercaya.</p>
+        <div class="result-actions"><button class="primary-button" id="downloadButton" type="button">Unduh jawaban saya (.xlsx)</button><button class="secondary-button" id="finishButton" type="button">Selesai 🌸</button></div>
+        <p class="tiny-note">Pemilik spreadsheet dapat mengunduh seluruh rekap melalui Google Sheets → File → Download → Microsoft Excel (.xlsx).</p>
+      </div>
+    </section>
+
+    <footer>♡ Survei Data Mahasiswa · Tugas Statistika FIKOM UMI · Jawaban sukarela & rahasia ♡</footer>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
